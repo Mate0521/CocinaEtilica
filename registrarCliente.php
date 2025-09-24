@@ -1,3 +1,16 @@
+<?php 
+require_once ("logica/Persona.php");
+require_once ("logica/Cliente.php");
+if(isset($_POST["registrar"])){
+    $nombre = $_POST["nombre"];
+    $apellido = $_POST["apellido"];
+    $fechaNacimiento = $_POST["fechaNacimiento"];
+    $correo = $_POST["correo"];
+    $clave = $_POST["clave"];
+    $cliente = new Cliente("", $nombre, $apellido, $correo, $clave, $fechaNacimiento);
+    $cliente -> registrar();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,7 +32,14 @@
 						<h3>Registrar Cliente</h3>
 					</div>
 					<div class="card-body">
-						<form>
+						<?php 
+						if(isset($_POST["registrar"])){
+						    echo "<div class='alert alert-success' role='alert'>
+                                    Cliente almacenado
+                                    </div>";
+						}
+						?>
+						<form method="post" action="registrarCliente.php">
 							<div class="mb-3">
 								<input type="text" class="form-control" name="nombre"
 									placeholder="Nombre" required>
@@ -41,7 +61,7 @@
 									placeholder="Clave" required>
 							</div>
 							<div class="mb-3">
-								<button type="submit" class="btn btn-primary">Registrar</button>
+								<button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
 							</div>
 
 						</form>

@@ -5,7 +5,8 @@ class Conexion{
     private $resultado;
     
     public function abrir(){
-        $this -> conexion = new mysqli("localhost", "root", "", "cocina_etilica");
+        //$this -> conexion = new mysqli("localhost", "root", "", "cocina_etilica");
+        $this -> conexion = new mysqli("localhost", "itiud_cocinaetilica", "UXpieQ728%", "itiud_cocinaetilica");
     }
     
     public function cerrar(){
