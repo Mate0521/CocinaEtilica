@@ -19,6 +19,12 @@ class AdminDAO {
                 from Admin
                 where correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
     }
+    public function obtenerAdmin()
+    {
+        return "SELECT nombre, apellido, correo
+            FROM admin
+            WHERE idAdmin='". $this->id ."'";
+    }
     
 }
 

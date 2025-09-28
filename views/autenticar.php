@@ -10,8 +10,9 @@ if(isset($_POST["autenticar"])){
     $admin = new Admin("", "", "", $correo, $clave);
     if($admin -> autenticar()){
         $_SESSION["id"] = $admin -> getId();
+		$_SESSION["rol"] = "A";
         echo "autentico";
-        header('Location: sesionAdmin.php');
+        header('Location: index_a.php');
     }
     
 }
@@ -56,8 +57,11 @@ if(isset($_POST["autenticar"])){
 							<div class="mb-3">
 								<button type="submit" class="btn btn-primary" name="autenticar">Autenticar</button>
 							</div>
-
+							<div class="mb-3">
+								<a href="registrarCliente.php" class="btn btn-link">¿No tienes cuenta? Regístrate</a>
+							</div>
 						</form>
+
 
 					</div>
 				</div>
