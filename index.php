@@ -1,6 +1,18 @@
 <?php
 session_start();
 
+require_once(__DIR__."\logica\Admin.php");
+require_once(__DIR__."\logica\Cliente.php");
+require_once(__DIR__."\logica\Persona.php");
+
+if(isset($_POST["cerrarSecion"]))
+{
+    session_destroy();
+    header('Location: index.php');
+    exit();
+    
+}
+
 $pages=[
     "home"=>"views/home.php",
     "consultarCliente"=> "views/consultarCliente.php",
@@ -13,13 +25,31 @@ $pages=[
 $page="home";
 
 
+
 $cliente= new Cliente();
 $admin=new Admin();
-if(isset($_SESSION["id"])){
-    if($_SESSION["rol"]== "A"){
+
+
+if(isset($_SESSION["id"]))
+{
+    if($_SESSION["role"]== "A"){
+        $admin->setId($_SESSION["id"]);
         $admin ->obtenerAdmin();
+        $_SESSION["nombre"]=$admin->getNombre();
+        $_SESSION["apellido"]=$admin->getApellido();
+        $_SESSION["email"]=$admin->getCorreo();
+
+        echo "aqui".$admin->getNombre().$admin->getApellido().$admin->getCorreo();
+
     }else{
-        $cliente->consultar();
+        $cliente->setId($_SESSION["id"]);;
+        $cliente->obtenerCliente();
+        $_SESSION["nombre"]=$cliente->getNombre();
+        $_SESSION["apellido"]=$cliente->getApellido();
+        $_SESSION["email"]=$cliente->getCorreo();
+        $_SESSION["fechaNac"]=$cliente->getFechaNacimiento();
+        echo "aqui". $cliente->getNombre().$cliente->getApellido().$cliente->getCorreo().$cliente->getFechaNacimiento().$_SESSION["id"];
+
     }
 }
 
@@ -42,7 +72,10 @@ if(isset($_SESSION["id"])){
     </div>
     <div>
         <?php
-            $_SESSION["rol"]=="A"?$page="admin":$page= "home";
+            if(isset($_SESSION["role"]))
+            {
+                $_SESSION["role"]=="A"?$page="admin":$page= "home";
+            }
             include ($pages[$page]);
         ?>
     </div>

@@ -1,6 +1,7 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/ClienteDAO.php");
+require_once(__DIR__."\..\persistencia\Conexion.php");
+require_once(__DIR__."\..\persistencia\ClienteDAO.php");
+require_once("Persona.php");
 
 class Cliente extends Persona {
     private $fechaNacimiento;
@@ -30,8 +31,14 @@ class Cliente extends Persona {
         $conexion = new Conexion();
         $conexion -> abrir();
         $clienteDAO = new ClienteDAO("", $this -> nombre, $this -> apellido, $this -> fechaNacimiento, $this -> correo, $this -> clave);        
-        $conexion -> ejecutar($clienteDAO -> registrar());
-        $conexion -> cerrar();
+        try{
+            $conexion -> ejecutar($clienteDAO -> registrar());
+            $conexion -> cerrar();
+            return "Cliente Registrado";
+        }catch(Exception $e){
+            return $e;
+        }
+
     }
     
     public function consultar(){
@@ -46,6 +53,47 @@ class Cliente extends Persona {
         }
         $conexion -> cerrar();
         return $clientes;
+    }
+
+    public function autenticar(){
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $clienteDAO = new ClienteDAO("", "", "", "", $this->correo, $this->clave);
+        $conexion -> ejecutar($clienteDAO -> autenticar());
+        $tupla = $conexion -> registro();
+        $conexion -> cerrar();
+        if($tupla != null){
+            $this -> id = $tupla[0];
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function obtenerCliente()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $clienteDAO = new ClienteDAO($this->id, "", "", "", $this->correo, $this->clave);
+        try{
+            $conexion -> ejecutar($clienteDAO -> obtenerCliente());
+            $tupla = $conexion -> registro();
+            $conexion -> cerrar();
+            if($tupla != null){
+                $this -> nombre = $tupla[0];
+                $this->apellido=$tupla[1];
+                $this->correo=$tupla[3];
+                $this->fechaNacimiento=$tupla[2];
+            }else{
+                return null;
+            }
+
+        }catch (Exception $e){
+            return $e;
+
+        }
+
+
     }
         
     

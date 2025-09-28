@@ -1,6 +1,7 @@
 <?php 
-require_once ("logica/Persona.php");
-require_once ("logica/Cliente.php");
+require_once (__DIR__."\..\logica\Persona.php");
+require_once (__DIR__."\..\logica\Cliente.php");
+
 if(isset($_POST["registrar"])){
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
@@ -8,7 +9,7 @@ if(isset($_POST["registrar"])){
     $correo = $_POST["correo"];
     $clave = $_POST["clave"];
     $cliente = new Cliente("", $nombre, $apellido, $correo, $clave, $fechaNacimiento);
-    $cliente -> registrar();
+	$var=$cliente -> registrar();
 }
 ?>
 <!DOCTYPE html>
@@ -32,11 +33,27 @@ if(isset($_POST["registrar"])){
 						<h3>Registrar Cliente</h3>
 					</div>
 					<div class="card-body">
-						<?php 
-						if(isset($_POST["registrar"])){
-						    echo "<div class='alert alert-success' role='alert'>
-                                    Cliente almacenado
-                                    </div>";
+						<?php 	
+						if (isset($_POST["registrar"])) {
+							if ($var instanceof Exception) {
+								echo "<div class='alert alert-danger' role='alert'>
+									Error al registrar: " . $var->getMessage() . "
+								</div>";
+							} elseif ($var === true || $var == 1) {
+
+								echo "<div class='alert alert-success' role='alert'>
+									Cliente almacenado correctamente. 
+								</div>
+								<script>
+									setTimeout(function() {
+										window.location.href = '../index.php';
+									}, 3000);
+								</script>";
+							} else {
+								echo "<div class='alert alert-warning' role='alert'>
+									Ocurrió un problema: $var
+								</div>";
+							}
 						}
 						?>
 						<form method="post" action="registrarCliente.php">

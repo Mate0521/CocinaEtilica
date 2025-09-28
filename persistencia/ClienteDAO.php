@@ -21,9 +21,24 @@ class ClienteDAO {
                 values ('" . $this -> nombre . "', '" . $this -> apellido . "', '" . $this -> fechaNacimiento . "', '" . $this -> correo . "', md5('" . $this -> clave . "'))";
     }
 
-    public function consultar(){
+    public function consultar()
+    {
         return "select idCliente, nombre, apellido, fechaNacimiento, correo
                 from Cliente";
+    }
+
+    public function autenticar()
+    {
+        return "SELECT idCliente
+                FROM  cliente
+                WHERE correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
+    }
+
+    public function obtenerCliente()
+    {
+        return "SELECT nombre, apellido, fechaNacimiento, correo
+            FROM cliente
+            WHERE idCliente = '". $this->id ."'";
     }
     
 }

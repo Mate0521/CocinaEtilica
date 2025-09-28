@@ -94,5 +94,9 @@ abstract class Persona {
         $this -> correo = $correo;
         $this -> clave = $clave;
     }
+
+    abstract protected function autenticar();
+
+
 }
 ?>

@@ -31,8 +31,8 @@
   <h2 class="text-center mb-4">Clásicos</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Mojito.png" class="card-img-top object-fit-contain" alt="Mojito" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Mojito.png" class="card-img-top object-fit-cover h-100" alt="Mojito" >
         <div class="card-body">
           <h5 class="card-title">Mojito</h5>
           <p class="card-text">Ron, hierbabuena, azúcar, limón y soda.</p>
@@ -43,8 +43,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/PiñaColada.png" class="card-img-top object-fit-contain" alt="Piña Colada" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/PiñaColada.png" class="card-img-top object-fit-cover h-100" alt="Piña Colada" >
         <div class="card-body">
           <h5 class="card-title">Piña Colada</h5>
           <p class="card-text">Ron, crema de coco y jugo de piña.</p>
@@ -55,8 +55,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Margarita.png" class="card-img-top object-fit-contain" alt="Margarita" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Margarita.png" class="card-img-top object-fit-cover h-100" alt="Margarita" >
         <div class="card-body">
           <h5 class="card-title">Margarita</h5>
           <p class="card-text">Tequila, licor de naranja y jugo de limón.</p>
@@ -72,8 +72,8 @@
   <h2 class="text-center mb-4">Whisky</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Manhatan.png" class="card-img-top object-fit-contain" alt="Manhattan" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Manhatan.png" class="card-img-top object-fit-cover h-100" alt="Manhattan">
         <div class="card-body">
           <h5 class="card-title">Manhattan</h5>
           <p class="card-text">Whisky, vermut rojo y amargo.</p>
@@ -84,8 +84,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Sour.png" class="card-img-top object-fit-contain " alt="Whiskey Sour" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Sour.png" class="card-img-top object-fit-cover h-100" alt="Whiskey Sour">
         <div class="card-body">
           <h5 class="card-title">Whiskey Sour</h5>
           <p class="card-text">Whisky, jugo de limón y azúcar.</p>
@@ -96,8 +96,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/iris.png" class="card-img-top object-fit-contain" alt="Irish Coffee" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/iris.png" class="card-img-top object-fit-cover h-100" alt="Irish Coffee" >
         <div class="card-body">
           <h5 class="card-title">Irish Coffee</h5>
           <p class="card-text">Whisky irlandés, café y crema batida.</p>
@@ -113,8 +113,8 @@
   <h2 class="text-center mb-4">Ron</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Mai.png" class="card-img-top object-fit-contain" alt="Mai Tai" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Mai.png" class="card-img-top object-fit-cover h-100" alt="Mai Tai" >
         <div class="card-body">
           <h5 class="card-title">Mai Tai</h5>
           <p class="card-text">Ron, curaçao, lima y orgeat.</p>
@@ -125,8 +125,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Zom.png" class="card-img-top object-fit-contain" alt="Zombie" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Zom.png" class="card-img-top object-fit-cover h-100" alt="Zombie" >
         <div class="card-body">
           <h5 class="card-title">Zombie</h5>
           <p class="card-text">Mezcla potente de varios rones, jugos y especias.</p>
@@ -137,8 +137,8 @@
     </div>
 
     <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="img/Tequila.png" class="card-img-top object-fit-contain" alt="secondary and Stormy" width="18rem">
+      <div class="card h-100 shadow-sm" width="18rem">
+        <img src="img/Tequila.png" class="card-img-top object-fit-convers h-100" alt="secondary and Stormy">
         <div class="card-body">
           <h5 class="card-title">secondary ’n’ Stormy</h5>
           <p class="card-text">Ron oscuro con ginger beer y lima.</p>

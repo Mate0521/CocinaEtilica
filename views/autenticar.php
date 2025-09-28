@@ -1,19 +1,31 @@
 <?php 
 session_start();
-require_once ("logica/Persona.php");
-require_once ("logica/Admin.php");
-require_once ("logica/Cliente.php");
+require_once (__DIR__."\..\logica\Persona.php");
+require_once (__DIR__."\..\logica\Admin.php");
+require_once (__DIR__."\..\logica\Cliente.php");
 
 if(isset($_POST["autenticar"])){
     $correo = $_POST["correo"];
     $clave = $_POST["clave"];
     $admin = new Admin("", "", "", $correo, $clave);
-    if($admin -> autenticar()){
+	$cliente= new Cliente("", "", "", $correo, $clave, "");
+    if($admin -> autenticar())
+	{
         $_SESSION["id"] = $admin -> getId();
-		$_SESSION["rol"] = "A";
-        echo "autentico";
-        header('Location: index_a.php');
-    }
+		$_SESSION["role"] = "A";
+        header('Location: ../index.php');
+    }elseif($cliente -> autenticar())
+	{
+		$_SESSION["id"] = $cliente -> getId();
+		$_SESSION["role"] = "U";
+		header('Location: ../index.php');
+	}else
+	{
+		$_SESSION["id"] = null;
+		$_SESSION["role"] = null;
+		$error = true;
+	}
+	
     
 }
 ?>
@@ -34,17 +46,15 @@ if(isset($_POST["autenticar"])){
 			<div class="col-4"></div>
 			<div class="col-4">
 				<div class="card">
+					<?php if (isset($error) && $error): ?>
+						<div class="alert alert-danger mt-3" role="alert" id="alertContainer">
+							<p id="alert">Error en el inicio de sesión. Verifique credenciales</p>
+						</div>
+					<?php endif; ?>
 					<div class="card-header">
 						<h3>Autenticar</h3>
 					</div>
 					<div class="card-body">
-						<?php 
-						if(isset($_POST["registrar"])){
-						    echo "<div class='alert alert-success' role='alert'>
-                                    Cliente almacenado
-                                    </div>";
-						}
-						?>
 						<form method="post" action="autenticar.php">
 							<div class="mb-3">
 								<input type="email" class="form-control" name="correo"
