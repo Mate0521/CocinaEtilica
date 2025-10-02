@@ -3,17 +3,23 @@ session_start();
 require_once ("logica/Persona.php");
 require_once ("logica/Admin.php");
 require_once ("logica/Cliente.php");
-
+$error = false;
 if(isset($_POST["autenticar"])){
     $correo = $_POST["correo"];
     $clave = $_POST["clave"];
     $admin = new Admin("", "", "", $correo, $clave);
     if($admin -> autenticar()){
         $_SESSION["id"] = $admin -> getId();
-        echo "autentico";
-        header('Location: sesionAdmin.php');
+        header('Location: index.php?pid=sesionAdmin');
+    }else{
+        $cliente = new Cliente("", "", "", $correo, $clave);
+        if($cliente -> autenticar()){
+            $_SESSION["id"] = $cliente -> getId();
+            header('Location: index.php?pid=sesionCliente');
+        }else{
+            $error = true;
+        }
     }
-    
 }
 ?>
 <!DOCTYPE html>
@@ -56,9 +62,15 @@ if(isset($_POST["autenticar"])){
 							<div class="mb-3">
 								<button type="submit" class="btn btn-primary" name="autenticar">Autenticar</button>
 							</div>
-
 						</form>
-
+						<?php
+                        if ($error) {
+                            echo "<div class='alert alert-danger' role='alert'>
+                                    Correo o clave incorrectos
+                                    </div>";
+                        }
+                        ?>
+						
 					</div>
 				</div>
 			</div>

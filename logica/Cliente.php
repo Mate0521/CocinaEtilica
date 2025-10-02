@@ -48,7 +48,32 @@ class Cliente extends Persona {
         return $clientes;
     }
         
+    public function autenticar(){
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $clienteDAO = new ClienteDAO("", "", "", "", $this -> correo, $this -> clave);
+        $conexion -> ejecutar($clienteDAO -> autenticar());
+        $tupla = $conexion -> registro();
+        $conexion -> cerrar();
+        if($tupla != null){
+            $this -> id = $tupla[0];
+            return true;
+        }else{
+            return false;
+        }
+    }
     
+    public function consultarPorId(){
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $clienteDAO = new ClienteDAO($this -> id);
+        $conexion -> ejecutar($clienteDAO -> consultarPorId());
+        $tupla = $conexion -> registro();
+        $conexion -> cerrar();
+        $this -> nombre = $tupla[0];
+        $this -> apellido = $tupla[1];
+        $this -> correo = $tupla[2];
+    }
 }
 
 

@@ -25,6 +25,16 @@ class ClienteDAO {
         return "select idCliente, nombre, apellido, fechaNacimiento, correo
                 from Cliente";
     }
-    
+
+    public function consultarPorID(){
+        return "select nombre, apellido, fechaNacimiento, correo
+                from Cliente
+                where idCliente = '" . $this -> id . "'";
+    }
+    public function autenticar(){
+        return "select idCliente
+                from Cliente
+                where correo = '" . $this -> correo . "' and clave = md5('" . $this -> clave . "')";
+    }
 }
 

@@ -22,6 +22,19 @@ class Admin extends Persona {
             return false;
         }
     }
+    
+    public function consultarPorId(){
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $adminDAO = new AdminDAO($this -> id);
+        $conexion -> ejecutar($adminDAO -> consultarPorId());
+        $tupla = $conexion -> registro();
+        $conexion -> cerrar();
+        $this -> nombre = $tupla[0];
+        $this -> apellido = $tupla[1];
+        $this -> correo = $tupla[2];
+    }
+    
 }
 
 
