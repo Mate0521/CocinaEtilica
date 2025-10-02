@@ -1,8 +1,8 @@
 <?php 
 session_start();
-require_once (__DIR__."\..\logica\Persona.php");
-require_once (__DIR__."\..\logica\Admin.php");
-require_once (__DIR__."\..\logica\Cliente.php");
+require_once (__DIR__."/../logica/Persona.php");
+require_once (__DIR__."/../logica/Admin.php");
+require_once (__DIR__."/../logica/Cliente.php");
 
 if(isset($_POST["autenticar"])){
     $correo = $_POST["correo"];

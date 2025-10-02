@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__."\..\persistencia\Conexion.php");
-require_once(__DIR__."\..\persistencia\ClienteDAO.php");
+require_once(__DIR__."/../persistencia/Conexion.php");
+require_once(__DIR__."/../persistencia/ClienteDAO.php");
 require_once("Persona.php");
 
 class Cliente extends Persona {

@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__."\..\persistencia\Conexion.php");
-require_once(__DIR__."\..\persistencia\AdminDAO.php");
+require_once(__DIR__."/../persistencia/Conexion.php");
+require_once(__DIR__."/../persistencia/AdminDAO.php");
 require_once("Persona.php");
 
 class Admin extends Persona {
