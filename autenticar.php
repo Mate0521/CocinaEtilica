@@ -3,8 +3,6 @@ session_start();
 require_once ("logica/Persona.php");
 require_once ("logica/Admin.php");
 require_once ("logica/Cliente.php");
-$ip_address = $_SERVER['REMOTE_ADDR'];
-echo $ip_address;
 $error = false;
 if(isset($_POST["autenticar"])){
     $correo = $_POST["correo"];
