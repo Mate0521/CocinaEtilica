@@ -34,7 +34,7 @@ class Cliente extends Persona {
         try{
             $conexion -> ejecutar($clienteDAO -> registrar());
             $conexion -> cerrar();
-            return "Cliente Registrado";
+            return true;
         }catch(Exception $e){
             return $e;
         }

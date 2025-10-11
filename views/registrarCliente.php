@@ -12,18 +12,7 @@ if(isset($_POST["registrar"])){
 	$var=$cliente -> registrar();
 }
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Cocina Etilica</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+<div>
 	<div class="container">
 		<div class="row mt-5">
 			<div class="col-4"></div>
@@ -41,12 +30,13 @@ if(isset($_POST["registrar"])){
 								</div>";
 							} elseif ($var === true || $var == 1) {
 
+								$_SESSION["pid"]="home";
 								echo "<div class='alert alert-success' role='alert'>
 									Cliente almacenado correctamente. 
 								</div>
 								<script>
 									setTimeout(function() {
-										window.location.href = '../index.php';
+										window.location.href = 'index.php';
 									}, 3000);
 								</script>";
 							} else {
@@ -56,7 +46,8 @@ if(isset($_POST["registrar"])){
 							}
 						}
 						?>
-						<form method="post" action="registrarCliente.php">
+	
+						<form method="post" action="index.php" name="registrar">
 							<div class="mb-3">
 								<input type="text" class="form-control" name="nombre"
 									placeholder="Nombre" required>
@@ -89,5 +80,5 @@ if(isset($_POST["registrar"])){
 		</div>
 	</div>
 
-</body>
-</html>
+</div>
+

@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require_once (__DIR__."\..\logica\Persona.php");
 require_once (__DIR__."\..\logica\Admin.php");
 require_once (__DIR__."\..\logica\Cliente.php");
@@ -13,16 +12,19 @@ if(isset($_POST["autenticar"])){
 	{
         $_SESSION["id"] = $admin -> getId();
 		$_SESSION["role"] = "A";
-        header('Location: ../index.php');
+		$_SESSION["pid"]="admin";
+        header('Location: index.php');
     }elseif($cliente -> autenticar())
 	{
 		$_SESSION["id"] = $cliente -> getId();
 		$_SESSION["role"] = "U";
-		header('Location: ../index.php');
+		$_SESSION["pid"]="home";
+		header('Location: index.php');
 	}else
 	{
 		$_SESSION["id"] = null;
 		$_SESSION["role"] = null;
+		$_SESSION["pid"]=null;
 		$error = true;
 	}
 	
@@ -55,7 +57,7 @@ if(isset($_POST["autenticar"])){
 						<h3>Autenticar</h3>
 					</div>
 					<div class="card-body">
-						<form method="post" action="autenticar.php">
+						<form method="post" action="index.php" name="autenticar">
 							<div class="mb-3">
 								<input type="email" class="form-control" name="correo"
 									placeholder="Correo" required>
@@ -68,7 +70,10 @@ if(isset($_POST["autenticar"])){
 								<button type="submit" class="btn btn-primary" name="autenticar">Autenticar</button>
 							</div>
 							<div class="mb-3">
-								<a href="registrarCliente.php" class="btn btn-link">¿No tienes cuenta? Regístrate</a>
+								<form action="index.php" method="post" name="registrar">
+
+									<button type="submit" class="btn" name="newCliente"><a class="btn btn-link">¿No tienes cuenta? Regístrate</a></button>
+								</form>
 							</div>
 						</form>
 

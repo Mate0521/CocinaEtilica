@@ -1,17 +1,28 @@
 <?php
+
 session_start();
 
 require_once(__DIR__."\logica\Admin.php");
 require_once(__DIR__."\logica\Cliente.php");
-require_once(__DIR__."\logica\Persona.php");
+
 
 if(isset($_POST["cerrarSecion"]))
 {
     session_destroy();
     header('Location: index.php');
     exit();
-    
+}elseif(isset($_POST["iniciarSecion"]))
+{
+    $_SESSION["pid"]="login";
+
+}elseif(isset($_POST["newCliente"]))
+{
+    $_SESSION["pid"]="regCliente";
+
 }
+
+
+
 
 $pages=[
     "home"=>"views/home.php",
@@ -22,7 +33,9 @@ $pages=[
 
 ];
 
-$page="home";
+if (!isset($_SESSION["pid"])) {
+    $_SESSION["pid"] = "home";
+}
 
 
 
@@ -52,8 +65,10 @@ if(isset($_SESSION["id"]))
 
     }
 }
-
+ 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -71,13 +86,18 @@ if(isset($_SESSION["id"]))
         ?>
     </div>
     <div>
+        
         <?php
-            if(isset($_SESSION["role"]))
-            {
-                $_SESSION["role"]=="A"?$page="admin":$page= "home";
-            }
-            include ($pages[$page]);
+
+        include ($pages[$_SESSION["pid"]]);
+
+        var_dump($_SESSION);
+
         ?>
+        <form action="index.php" method="post">
+            <button type="submit" class="btn btn-danger" name="cerrarSecion">Cerrar secion</button>
+        </form>
+
     </div>
      <div>
         <?php

@@ -86,7 +86,10 @@
         </div>
     </nav>
 
-    <?php } }else{ ?>
+    <?php 
+    } }else{ 
+        
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
@@ -102,10 +105,12 @@
                 <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Categorias</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                <li class="nav-item">
+                    <form action="index.php" method="post">
+                        <button type="submit" class="btn btn-outline-primary" name="iniciarSecion"><i class="fa-solid fa-user me-1"></i>Iniciar Sesión</button>
+                    </form>
+                </li>
             </ul>
-            <a href="views/autenticar.php" class="btn btn-outline-secondary ms-3">
-                <i class="fa-solid fa-user me-1"></i> Iniciar Sesión
-            </a>
             </div>
         </div>
     </nav>
