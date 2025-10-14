@@ -1,5 +1,8 @@
 <?php
 $id = $_SESSION["id"];
+if($_SESSION["rol"] != "cliente"){
+    header('Location: ?pid=' . base64_encode("noAutorizado.php"));
+}
 $cliente = new Cliente($id);
 $cliente ->consultarPorId();
 ?>
@@ -36,7 +39,7 @@ $cliente ->consultarPorId();
 									class="fa-solid fa-user-pen me-2"></i> Editar Perfil</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item text-danger"
-								href="index.php?salir=true"> <i
+								href="?salir=true"> <i
 									class="fa-solid fa-right-from-bracket me-2"></i> Salir
 							</a></li>
 						</ul></li>

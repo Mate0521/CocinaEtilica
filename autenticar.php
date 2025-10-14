@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require_once ("logica/Persona.php");
 require_once ("logica/Admin.php");
 require_once ("logica/Cliente.php");
@@ -10,12 +9,14 @@ if(isset($_POST["autenticar"])){
     $admin = new Admin("", "", "", $correo, $clave);
     if($admin -> autenticar()){
         $_SESSION["id"] = $admin -> getId();
-        header('Location: index.php?pid=sesionAdmin');
+        $_SESSION["rol"] = "admin";
+        header('Location: ?pid=' . base64_encode("presentacion/sesionAdmin.php"));
     }else{
         $cliente = new Cliente("", "", "", $correo, $clave);
         if($cliente -> autenticar()){
             $_SESSION["id"] = $cliente -> getId();
-            header('Location: index.php?pid=sesionCliente');
+            $_SESSION["rol"] = "cliente";
+            header('Location: ?pid=' . base64_encode("presentacion/sesionCliente.php"));
         }else{
             $error = true;
         }
@@ -50,7 +51,7 @@ if(isset($_POST["autenticar"])){
                                     </div>";
 						}
 						?>
-						<form method="post" action="autenticar.php">
+						<form method="post" action="?pid=<?php echo base64_encode("autenticar.php")?>">
 							<div class="mb-3">
 								<input type="email" class="form-control" name="correo"
 									placeholder="Correo" required>
@@ -61,6 +62,7 @@ if(isset($_POST["autenticar"])){
 							</div>
 							<div class="mb-3">
 								<button type="submit" class="btn btn-primary" name="autenticar">Autenticar</button>
+								<a href="?pid=<?php echo base64_encode("presentacion/cliente/registrarCliente.php") ?>">Registrar</a>
 							</div>
 						</form>
 						<?php

@@ -13,12 +13,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link active" href="?pid=<?php echo base64_encode("presentacion/sesionAdmin.php") ?>">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Categorias</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
 				</ul>
-				<a href="#" class="btn btn-outline-secondary ms-3"> <i
+				<a href="?pid=<?php echo base64_encode("autenticar.php") ?>" class="btn btn-outline-secondary ms-3"> <i
 					class="fa-solid fa-user me-1"></i> Iniciar Sesión
 				</a>
 			</div>

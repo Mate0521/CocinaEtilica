@@ -4,6 +4,7 @@ require_once ("logica/Persona.php");
 require_once ("logica/Admin.php");
 require_once ("logica/Cliente.php");
 if (isset($_GET["salir"])) {
+    session_unset();
     session_destroy();
 }
 
@@ -25,8 +26,12 @@ if (isset($_GET["salir"])) {
 if(!isset($_GET["pid"])){
     include ("presentacion/inicio.php");    
 }else{
-    $pid = $_GET["pid"];
-    include ("presentacion/" . $pid . ".php");
+    $pid = base64_decode($_GET["pid"]);
+    if(isset($_SESSION["id"])){
+        include ($pid);
+    }else{
+        include ($pid);
+    }
 }
 ?>
 
