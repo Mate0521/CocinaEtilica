@@ -29,8 +29,9 @@ $pages=[
     "consultarCliente"=> "views/consultarCliente.php",
     "login"=> "views/autenticar.php",
     "regCliente"=> "views/registrarCliente.php",
-    "admin"=> "views/sesionAdmin.php"
-
+    "admin"=> "views/sesionAdmin.php",
+    "crearProducto"=> "views/crearProducto.php",
+    "consultarProducto"=>"views/consultarProcduto.php"
 ];
 
 if (!isset($_SESSION["pid"])) {
