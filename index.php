@@ -3,6 +3,10 @@ session_start();
 require_once ("logica/Persona.php");
 require_once ("logica/Admin.php");
 require_once ("logica/Cliente.php");
+require_once ("logica/Producto.php");
+require_once ("logica/Proveedor.php");
+require_once ("logica/TipoProducto.php");
+
 if (isset($_GET["salir"])) {
     session_unset();
     session_destroy();
@@ -31,6 +35,7 @@ if(!isset($_GET["pid"])){
         include ($pid);
     }else{
         include ($pid);
+        //TODO reparar esto
     }
 }
 ?>

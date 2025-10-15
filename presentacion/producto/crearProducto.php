@@ -5,6 +5,21 @@ if ($_SESSION["rol"] != "admin") {
 }
 $admin = new Admin($id);
 $admin->consultarPorId();
+
+if(isset($_POST["crear"])){
+    $nombre = $_POST["nombre"];
+    $tamano = $_POST["tamano"];
+    $precio = $_POST["precio"];
+    //Envio de archivo
+    $imagenNombre = $_FILES["imagen"]["name"];    
+    $imagenRutaLocal = $_FILES["imagen"]["tmp_name"];
+    copy($imagenRutaLocal, "imagenes/" . $imagenNombre);
+    
+    $proveedor = $_POST["proveedor"];
+    $tipoProducto = $_POST["tipoProducto"];
+    $producto = new Producto("", $nombre, $tamano, $precio, $imagenNombre, $proveedor, $tipoProducto);
+    $producto -> crear();
+}
 ?>
 <body>
 <?php include 'presentacion/menuAdministrador.php'; ?>
@@ -18,39 +33,57 @@ $admin->consultarPorId();
 					</div>
 					<div class="card-body">
 						<?php 
-						if(isset($_POST["registrar"])){
+						if(isset($_POST["crear"])){
 						    echo "<div class='alert alert-success' role='alert'>
-                                    Cliente almacenado
+                                    Producto almacenado exitosamente!
                                     </div>";
 						}
 						?>
-						<form method="post" action="registrarCliente.php">
-							<div class="mb-3">
-								<input type="text" class="form-control" name="nombre"
-									placeholder="Nombre" required>
-							</div>
-							<div class="mb-3">
-								<input type="text" class="form-control" name="apellido"
-									placeholder="Apellido" required>
-							</div>
-							<div class="mb-3">
-								<input type="date" class="form-control" name="fechaNacimiento"
-									placeholder="Fecha de Nacimiento" required>
-							</div>
-							<div class="mb-3">
-								<input type="email" class="form-control" name="correo"
-									placeholder="Correo" required>
-							</div>
-							<div class="mb-3">
-								<input type="password" class="form-control" name="clave"
-									placeholder="Clave" required>
-							</div>
-							<div class="mb-3">
-								<button type="submit" class="btn btn-primary" name="registrar">Registrar</button>
-							</div>
-
-						</form>
-
+						<form method="post" enctype="multipart/form-data" action="?pid=<?php echo base64_encode("presentacion/producto/crearProducto.php")?>">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" name="nombre"
+                                        placeholder="Nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" name="tamano"
+                                        placeholder="Tamaño" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" name="precio"
+                                        placeholder="Precio" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Imagen</label>
+                                    <input class="form-control" type="file" id="formFile" name="imagen">
+                                </div>
+                                <div class="mb-3">
+                                <label for="tipo" class="form-label">Tipo Producto</label>
+                                <select class="form-select" name="tipoProducto" required>
+                                    <?php
+                                    $tipo = new TipoProducto();
+                                    $tipos = $tipo -> consultar();
+                                    foreach($tipos as $t){
+                                        echo "<option value='" . $t->getId() . "'>" . $t->getNombre() . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                                <div class="mb-3">
+                                <label for="proveedor" class="form-label">Proveedor</label>
+                                <select class="form-select" name="proveedor" required>
+                                    <?php
+                                    $proveedor = new Proveedor();
+                                    $proveedores = $proveedor -> consultar();
+                                    foreach($proveedores as $p){
+                                        echo "<option value='" . $p->getId() . "'>" . $p->getNombre() . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary" name="crear">Crear</button>
+                                </div>
+                            </form>
 					</div>
 				</div>
 			</div>
