@@ -11,7 +11,8 @@ if(isset($_POST["crear"])){
     $tamano = $_POST["tamano"];
     $precio = $_POST["precio"];
     //Envio de archivo
-    $imagenNombre = $_FILES["imagen"]["name"];    
+    $imagenNombre = time() . "." . pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);    
+    echo $imagenNombre;
     $imagenRutaLocal = $_FILES["imagen"]["tmp_name"];
     copy($imagenRutaLocal, "imagenes/" . $imagenNombre);
     
