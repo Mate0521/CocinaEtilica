@@ -30,5 +30,10 @@ class ProductoDAO{
         return "select idProveedor, nombre
                 from Proveedor";
     }
+    public function actualizar(){
+        return "UPDATE `producto` 
+                SET `nombre`='$this->nombre',`tamano`='$this->tamano',`precioVenta`='$this->precio',`imagen`='$this->imagen',`Proveedor_idProveedor`='$this->proveedor',`TipoProducto_idTipoProducto`='$this->tipoProducto' 
+                WHERE `idProducto`= $this->id";
+    }
 }
 ?>

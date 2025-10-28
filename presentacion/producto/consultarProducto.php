@@ -1,17 +1,15 @@
 <?php
-require_once ("logica/Producto.php");
 $producto = new Producto();
 $productos = $producto -> consultar();
 
 $id = $_SESSION["id"];
-if ($_SESSION["rol"] != "admin") {
-    header('Location: ?pid=' . base64_encode("noAutorizado.php"));
+if ($_SESSION["rol"] != "A") {
+    header('Location: ?pid=' . base64_encode("Error"));
 }
 $admin = new Admin($id);
 $admin->consultarPorId();
 ?>
-<body>
-    <?php include 'presentacion/menuAdministrador.php'; ?>
+<div>
     <div class="container">
         <div class="row mt-5">
             <div class="col">
@@ -65,4 +63,4 @@ $admin->consultarPorId();
             </div>
         </div>
     </div>
-</body>
+</div>

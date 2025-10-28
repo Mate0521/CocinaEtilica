@@ -1,11 +1,11 @@
 <?php
 $id = $_SESSION["id"];
-if ($_SESSION["rol"] != "admin") {
-    header('Location: ?pid=' . base64_encode("noAutorizado.php"));
+if ($_SESSION["rol"] != "A") {
+    header('Location: ?pid=' . base64_encode("Error"));
 }
 $admin = new Admin($id);
 $admin->consultarPorId();
 ?>
-<body>
+<div>
 <?php include 'presentacion/menuAdministrador.php'; ?>
-</body>
+</div>

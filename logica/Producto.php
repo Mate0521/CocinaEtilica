@@ -103,6 +103,15 @@ class Producto{
         return $proveedores;
     }
 
+    public function actualizar(){
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $productoDAO = new ProductoDAO($this->id, $this -> nombre, $this -> tamano, $this -> precio, $this -> imagen, $this -> proveedor, $this -> tipoProducto);    
+        $sql=$productoDAO -> actualizar();    
+        $conexion -> ejecutar($sql);
+        $conexion -> cerrar();
+    }
+
 }
 
 ?>

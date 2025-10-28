@@ -1,7 +1,7 @@
 <?php 
 $id = $_SESSION["id"];
-if ($_SESSION["rol"] != "admin") {
-    header('Location: ?pid=' . base64_encode("noAutorizado.php"));
+if ($_SESSION["rol"] != "A") {
+    header('Location: ?pid=' . base64_encode("Error"));
 }
 $admin = new Admin($id);
 $admin->consultarPorId();
@@ -40,7 +40,7 @@ if(isset($_POST["crear"])){
                                     </div>";
 						}
 						?>
-						<form method="post" enctype="multipart/form-data" action="?pid=<?php echo base64_encode("presentacion/producto/crearProducto.php")?>">
+						<form method="post" enctype="multipart/form-data" action="?pid=<?php echo base64_encode("crearProducto")?>">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" name="nombre"
                                         placeholder="Nombre" required>
