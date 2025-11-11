@@ -1,6 +1,4 @@
 <?php
-require_once 'persistencia/Conexion.php';
-require_once 'persistencia/TipoProductoDAO.php';
 class TipoProducto {
 	private $id;
 	private $nombre;

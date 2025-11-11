@@ -1,6 +1,4 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/ProveedorDAO.php");
 
 class Proveedor{
     private $id;

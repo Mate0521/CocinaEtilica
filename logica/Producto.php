@@ -1,6 +1,4 @@
 <?php
-require_once ("persistencia/Conexion.php");
-require_once ("persistencia/ProductoDAO.php");
 
 class Producto{
     private $id;
@@ -111,6 +109,25 @@ class Producto{
         $conexion -> ejecutar($sql);
         $conexion -> cerrar();
     }
+
+    public function buscar($filtro){
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $productoDAO = new ProductoDAO();
+        $conexion -> ejecutar($productoDAO -> buscar($filtro));
+        $productos = array();
+        while (($tupla = $conexion -> registro()) != null){
+            $proveedor = new Proveedor($tupla[5]);
+            $proveedor -> consultarPorId();
+            $tipoProducto = new TipoProducto($tupla[6]);
+            $tipoProducto -> consultarPorId();
+            $producto = new Producto($tupla[0], $tupla[1], $tupla[2], $tupla[3], $tupla[4], $proveedor, $tipoProducto);
+            array_push($productos, $producto);
+        }
+        $conexion -> cerrar();
+        return $productos;
+    }
+
 
 }
 

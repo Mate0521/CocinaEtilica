@@ -36,8 +36,19 @@ if(isset($_SESSION["rol"])){
                         <li><a class="dropdown-item"
 							href="?pid=<?php echo base64_encode("actualizarProducto") ?>">Actualizar Producto
 								Productos</a></li>
+                        <li><a class="dropdown-item"
+							href="?pid=<?php echo base64_encode("buscarProducto") ?>">Buscar Producto
+								Productos</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
+					</ul></li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+					href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false"> Cliente </a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item"
+							href="?pid=<?php echo base64_encode("consultarCliente") ?>">Consultar
+								Cliente</a></li>
 					</ul></li>
 			</ul>
 			<!-- Dropdown con nombre y apellido -->

@@ -1,9 +1,11 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/ClienteDAO.php");
+require_once(__DIR__ ."\..\persistencia\ClienteDAO.php");
+require_once(__DIR__."\Persona.php");
+require_once(__DIR__ ."\..\persistencia\Conexion.php");
 
 class Cliente extends Persona {
     private $fechaNacimiento;
+    private $estado;
     
     /**
      * @return mixed
@@ -21,9 +23,19 @@ class Cliente extends Persona {
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
-    public function __construct($id=0, $nombre="", $apellido="", $correo="", $clave="", $fechaNacimiento=""){
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+    public function __construct($id=0, $nombre="", $apellido="", $correo="", $clave="", $fechaNacimiento="", $estado=0){
         parent::__construct($id, $nombre, $apellido, $correo, $clave);
         $this -> fechaNacimiento = $fechaNacimiento;
+        $this -> estado = $estado;
     }
     
     public function registrar(){
@@ -41,7 +53,7 @@ class Cliente extends Persona {
         $conexion -> ejecutar($clienteDAO -> consultar());
         $clientes = array();
         while(($tupla = $conexion -> registro()) != null){
-            $cliente = new Cliente($tupla[0], $tupla[1], $tupla[2], $tupla[4], "", $tupla[3]);
+            $cliente = new Cliente($tupla[0], $tupla[1], $tupla[2], $tupla[4], "", $tupla[3], $tupla[5]);
             array_push($clientes, $cliente);
         }
         $conexion -> cerrar();
@@ -73,6 +85,17 @@ class Cliente extends Persona {
         $this -> nombre = $tupla[0];
         $this -> apellido = $tupla[1];
         $this -> correo = $tupla[2];
+    }
+
+    public function cambiarEstado(){
+        $this -> estado==1 ? $this -> estado=0 : $this -> estado=1;
+        $conexion = new Conexion();
+        $conexion -> abrir();
+        $clienteDAO = new ClienteDAO($this -> id, "", "", "", "", "", $this -> estado);
+        $sql = $clienteDAO -> cambiarEstado();
+        $conexion -> ejecutar($sql);
+        $conexion -> filasAfectadas()!=1?($this -> estado==1?$this -> estado=0:$this -> estado=1):null;
+        $conexion -> cerrar();
     }
 }
 

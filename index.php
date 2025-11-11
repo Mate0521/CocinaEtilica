@@ -6,6 +6,10 @@ require_once ("logica/Cliente.php");
 require_once ("logica/Producto.php");
 require_once ("logica/Proveedor.php");
 require_once ("logica/TipoProducto.php");
+require_once ("persistencia/Conexion.php");
+require_once ("persistencia/ProductoDAO.php");
+require_once("persistencia/ProveedorDAO.php");
+require_once ('persistencia/TipoProductoDAO.php');
 
 $pages = [
     "Login"=> "presentacion/autenticar.php",
@@ -16,7 +20,9 @@ $pages = [
     "sesCliente"=> "presentacion/sesionCliente.php",
     "crearProducto"=>"presentacion/producto/crearProducto.php",
     "consultarProducto"=>"presentacion/producto/consultarProducto.php",
-    "actualizarProducto"=>"presentacion/producto/actualizarProducto.php"
+    "actualizarProducto"=>"presentacion/producto/actualizarProducto.php",
+    "buscarProducto"=>"presentacion/producto/buscarProducto.php",
+    "consultarCliente"=>"presentacion/cliente/consultarCliente.php"
 
 ];
 
@@ -49,6 +55,9 @@ if (!isset($_SESSION["id"]) || empty($_SESSION["id"])) {
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 </head>
 
 <body>
