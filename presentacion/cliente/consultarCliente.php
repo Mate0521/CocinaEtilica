@@ -45,7 +45,7 @@ $admin->consultarPorId();
                                 echo "<td>" . $c -> getCorreo() . "</td>";
                             ?>
                             <td>
-                                <div id="estado_<?php echo $c->getId() ?>" data-id="<?php echo $c->getId() ?>" class="estado-toggle">
+                                <div id="estado_<?php echo $c->getId() ?>" data-id="<?php echo $c->getId() ?>" data-estado="<?php echo $c->getEstado(); ?>" class="estado-toggle">
                                     <?php if ($c->getEstado() == 1): ?>
                                         <span><i class="bi bi-check-circle text-success"></i> Activo</span>
                                     <?php else: ?>
@@ -70,22 +70,24 @@ $admin->consultarPorId();
 <script>
 
 $(document).on("click", '[id^="estado_"]', function() {
-    let id = $(this).data("id");
     let div = $(this);
+    let id = div.data("id");
+    let estado = div.data("estado");
+
+    // alternar estado (sincronizado con el servidor)
+    let nuevoEstado = estado == 1 ? 0 : 1;
 
     $.ajax({
         url: "ajax/cambiarEstado.php",
         type: "POST",
-        data: { 
-            id: id,
-            estado: <?php echo $c->getEstado(); ?>
-         },
-        success: function(nuevoEstado) {
-            if (nuevoEstado == 1) {
+        data: { id: id, estado: estado },
+        success: function(respuesta) {
+            if (respuesta == 1) {
                 div.html("<span><i class='bi bi-check-circle text-success'></i> Activo</span>");
             } else {
                 div.html("<span><i class='bi bi-x-circle text-danger'></i> Inactivo</span>");
             }
+            div.data("estado", respuesta);
         },
         error: function() {
             alert("Error al cambiar el estado");

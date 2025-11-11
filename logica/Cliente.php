@@ -94,7 +94,9 @@ class Cliente extends Persona {
         $clienteDAO = new ClienteDAO($this -> id, "", "", "", "", "", $this -> estado);
         $sql = $clienteDAO -> cambiarEstado();
         $conexion -> ejecutar($sql);
-        $conexion -> filasAfectadas()!=1?($this -> estado==1?$this -> estado=0:$this -> estado=1):null;
+        if ($conexion->filasAfectadas() != 1) {
+            $this->estado = ($this->estado == 1) ? 0 : 1;
+        }
         $conexion -> cerrar();
     }
 }
