@@ -39,6 +39,9 @@ if(isset($_SESSION["rol"])){
                         <li><a class="dropdown-item"
 							href="?pid=<?php echo base64_encode("buscarProducto") ?>">Buscar Producto
 								Productos</a></li>
+                        <li><a class="dropdown-item"
+							href="?pid=<?php echo base64_encode("reporteProducto") ?>">Reporte Producto
+                        </a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
 					</ul></li>

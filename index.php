@@ -22,7 +22,8 @@ $pages = [
     "consultarProducto"=>"presentacion/producto/consultarProducto.php",
     "actualizarProducto"=>"presentacion/producto/actualizarProducto.php",
     "buscarProducto"=>"presentacion/producto/buscarProducto.php",
-    "consultarCliente"=>"presentacion/cliente/consultarCliente.php"
+    "consultarCliente"=>"presentacion/cliente/consultarCliente.php",
+    "reporteProducto"=>"presentacion/producto/reporteProducto.php"
 
 ];
 
